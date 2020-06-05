@@ -1,0 +1,17 @@
+以服务器ip启动服务器，开放端口为8000：
+python3 manage.py runserver 0.0.0.0:800
+
+用shell进行交互（可以将服务器运行在后台，这样不影响shell）
+启动shell：
+python3 manage.py shell
+进入python交互之后
+>>>from pillbox.models import *    # 这条python语句可以将数据库里创建的表格包含进来
+>>>t = User.objects.all()    # User为pillbox/modesl.py里的User对象，对应与数据库里用户名和用户名密码的表。返回的t为存储数据库中User类型对象的列表
+>>>tmp_user = User.objects.get(user_name='zhenwei')    # 从数据库中获取user_name为'zhenwei'的对象，这里user_name为主键，不可修改，不可重复
+>>>tmp_user.password    # tmp_user对象的password属性，对应用户名和用户密码的表里用户名为’zhenwei‘的记录对应的密码
+>>>tmp_user_add = User.objects.create(user_name='test_user_name', password='test_password')    # 创建一个用户名和密码的记录，返回创建记录的对象
+
+
+重新生成数据库
+python3 manage.py makemigrations
+python3 manage.py migrate
